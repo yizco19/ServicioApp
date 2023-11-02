@@ -4,7 +4,6 @@ import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.widget.Button
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import java.util.Random
@@ -17,7 +16,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val botonPrimerPlano = findViewById<Button>(R.id.calcular)
-        val texto = findViewById<TextView>(R.id.texto)
 
         botonPrimerPlano.setOnClickListener {
 //variable para cambiar el texto
@@ -48,6 +46,24 @@ class MainActivity : AppCompatActivity() {
         val botonSegundoPlano = findViewById<Button>(R.id.calcular2)
         botonSegundoPlano.setOnClickListener{
             startService(Intent(this,SegundoPlano::class.java))
+        }
+        val botonIntentServicio=findViewById<Button>(R.id.intentServicioBoton)
+        botonIntentServicio.setOnClickListener{
+            val intent = Intent(this@MainActivity,
+                EjIntentService::class.java)
+            startService(intent)
+        }
+        val botonVincular=findViewById<Button>(R.id.abrirVincular)
+        botonVincular.setOnClickListener{
+            val intent=Intent(this,VincularActivity::class.java)
+            startActivity(intent)
+
+        }
+        val botonWorkManager=findViewById<Button>(R.id.workManagerBoton)
+        botonWorkManager.setOnClickListener{
+            val intent=Intent(this,WorkActivity::class.java)
+            startActivity(intent)
+
         }
     }
 }

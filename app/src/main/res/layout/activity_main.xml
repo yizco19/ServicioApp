@@ -26,6 +26,24 @@
             android:text="Segundo Plano" />
 
         <Button
+            android:id="@+id/intentServicioBoton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Intent Servicio" />
+
+        <Button
+            android:id="@+id/abrirVincular"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Vincular" />
+
+        <Button
+            android:id="@+id/workManagerBoton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="WorkManager" />
+
+        <Button
             android:id="@+id/color"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
@@ -14,9 +15,26 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ServicioApp"
         tools:targetApi="34">
+        <activity
+            android:name=".WorkActivity"
+            android:exported="false" />
+        <activity
+            android:name=".VincularActivity"
+            android:exported="false" />
 
         <service
+            android:name=".Vinculado"
+            android:enabled="true"
+            android:exported="true" />
+        <service
+            android:name=".EjIntentService"
+            android:exported="false" />
+        <service
             android:name=".PrimerPlano"
+            android:enabled="true"
+            android:exported="true" />
+        <service
+            android:name=".SegundoPlano"
             android:enabled="true"
             android:exported="true" />
 

@@ -85,14 +85,11 @@ class PrimerPlano : Service() {
     }
 
 
-    private fun isPrime(number: Int, divisor: Int = number - 1): Boolean {
-        if (number <= 1 || divisor == 1) {
-            return true
+    private fun isPrime(number :Int): Boolean {
+        for (i in 2 until number) {
+            if (number % i == 0) return false
         }
-        if (number % divisor == 0) {
-            return false
-        }
-        return isPrime(number, divisor / 2)
+        return true
     }
 
     // Función para encontrar números primos
