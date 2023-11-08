@@ -15,26 +15,25 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ServicioApp"
         tools:targetApi="34">
-        <activity
-            android:name=".WorkActivity"
-            android:exported="false" />
-        <activity
-            android:name=".VincularActivity"
-            android:exported="false" />
-
         <service
-            android:name=".Vinculado"
+            android:name=".EventBusService"
+            android:enabled="true"
+            android:exported="true"></service>
+        <service
+            android:name=".PrimosIntentService"
+            android:exported="false" />
+        <service
+            android:name=".SegundoPlano"
             android:enabled="true"
             android:exported="true" />
-        <service
-            android:name=".EjIntentService"
-            android:exported="false" />
         <service
             android:name=".PrimerPlano"
             android:enabled="true"
             android:exported="true" />
+
+
         <service
-            android:name=".SegundoPlano"
+            android:name=".PrimerPlano"
             android:enabled="true"
             android:exported="true" />
 
