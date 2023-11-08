@@ -21,6 +21,8 @@ class BroadCastActivity : AppCompatActivity() {
 
         //Botón para salir la aplicación
         findViewById<Button>(R.id.salir).setOnClickListener {
+            //desregistrar Broadcast
+            applicationContext.unregisterReceiver(receiver)
             finish()
         }
         val intent=Intent()
