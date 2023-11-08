@@ -6,10 +6,10 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
-import androidx.work.OneTimeWorkRequest
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
 import androidx.work.WorkRequest
+import org.greenrobot.eventbus.Subscribe
 import java.util.Random
 
 class MainActivity : AppCompatActivity() {
@@ -74,6 +74,7 @@ class MainActivity : AppCompatActivity() {
 
         // Botón para calcular los primos en WorkManager
         findViewById<Button>(R.id.workManager).setOnClickListener {
+
             val workerManager: WorkManager = WorkManager.getInstance(this)
             val petition :WorkRequest = OneTimeWorkRequestBuilder<PrimeWorker>().build()
             val id=petition.id
@@ -97,6 +98,7 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
+
 
 }
 
