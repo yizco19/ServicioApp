@@ -3,67 +3,100 @@ package com.example.servicioapp
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
+import androidx.work.OneTimeWorkRequest
+import androidx.work.OneTimeWorkRequestBuilder
+import androidx.work.WorkManager
+import androidx.work.WorkRequest
 import java.util.Random
 
 class MainActivity : AppCompatActivity() {
-    private var enabled = false
+    private var enabledPrimerPlano = false
+    private var enabledSegundoPlano = false
+    private var enabledIntentService = false
+    private val primo=Integer.MAX_VALUE/40000
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val botonPrimerPlano = findViewById<Button>(R.id.calcular)
-
-        botonPrimerPlano.setOnClickListener {
-//variable para cambiar el texto
-            if(!enabled) {
-                //es un intetn y se le pasa el mensaje cómo parámetro
-                val serviceIntent = Intent(this, PrimerPlano::class.java)
-                serviceIntent.putExtra("inputExtra", "Se tiene que avisar de que está en primer plano")
-                        //se inicia en primer plano
-                        ContextCompat.startForegroundService(this, serviceIntent)
-                botonPrimerPlano.text="Stop"
-                enabled=true
+        // Botón para calcular los números primos en primer plano
+        findViewById<Button>(R.id.primerPlano).setOnClickListener {
+            if (!enabledPrimerPlano) {
+                val intent = Intent(this, PrimerPlano::class.java)
+                intent.putExtra("numero", primo)
+                startService(intent)
+                enabledPrimerPlano= true
+            }else{
+                val intent = Intent(this, PrimerPlano::class.java)
+                stopService(intent)
+                enabledPrimerPlano= false
             }
-            else {
-                botonPrimerPlano.text="Start"
-                val serviceIntent = Intent(this, PrimerPlano::class.java)
-                //se para
-                stopService(serviceIntent)
+
+        }
+
+        // Botón para calcular los números primos en segundo plano
+        findViewById<Button>(R.id.segundoPlano).setOnClickListener {
+            if (!enabledSegundoPlano) {
+                val intent = Intent(this, SegundoPlano::class.java)
+
+                // Iniciar el servicio
+                startService(intent)
+
+                enabledPrimerPlano= true
+            }else{
+                val intent = Intent(this, SegundoPlano::class.java)
+                stopService(intent)
+                enabledPrimerPlano= false
+            }
+
+        }
+
+        // Botón para calcular los números primos en IntentService
+        findViewById<Button>(R.id.intentService).setOnClickListener {
+            if (enabledIntentService){
+                // Crear un Intent
+                val intent = Intent(this, PrimosIntentService::class.java)
+
+                // Pasar el número a calcular
+                intent.putExtra("numero", Integer.MAX_VALUE / 40000)
+
+                // Iniciar el servicio
+                startService(intent)
+            }else{
+                val intent = Intent(this, PrimosIntentService::class.java)
+                stopService(intent)
+                enabledIntentService= false
             }
         }
 
-        val botonColor = findViewById<Button>(R.id.color)
-        botonColor.setOnClickListener {
+        // Botón para calcular los primos en WorkManager
+        findViewById<Button>(R.id.workManager).setOnClickListener {
+            val workerManager: WorkManager = WorkManager.getInstance(this)
+            val petition :WorkRequest = OneTimeWorkRequestBuilder<PrimeWorker>().build()
+            val id=petition.id
+            workerManager.getWorkInfoByIdLiveData(id).observe(this) {
+                if(it!=null && it.state.isFinished){
+                    val resultado=it.outputData.getString("vuelta")
+                    Log.d("Worker", resultado.toString())
+                }
+
+            }
+            workerManager.enqueue(petition)
+        }
+
+        // Botón para cambiar el color del botón
+        findViewById<Button>(R.id.cambiarColor).setOnClickListener {
             val rnd = Random()
+
             val color = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256))
-            botonColor.setBackgroundColor(color)
+
+            findViewById<Button>(R.id.cambiarColor).setBackgroundColor(color)
         }
 
-        val botonSegundoPlano = findViewById<Button>(R.id.calcular2)
-        botonSegundoPlano.setOnClickListener{
-            startService(Intent(this,SegundoPlano::class.java))
-        }
-        val botonIntentServicio=findViewById<Button>(R.id.intentServicioBoton)
-        botonIntentServicio.setOnClickListener{
-            val intent = Intent(this@MainActivity,
-                EjIntentService::class.java)
-            startService(intent)
-        }
-        val botonVincular=findViewById<Button>(R.id.abrirVincular)
-        botonVincular.setOnClickListener{
-            val intent=Intent(this,VincularActivity::class.java)
-            startActivity(intent)
-
-        }
-        val botonWorkManager=findViewById<Button>(R.id.workManagerBoton)
-        botonWorkManager.setOnClickListener{
-            val intent=Intent(this,WorkActivity::class.java)
-            startActivity(intent)
-
-        }
     }
+
 }
+

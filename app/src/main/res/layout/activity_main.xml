@@ -14,45 +14,33 @@
         tools:layout_editor_absoluteY="1dp">
 
         <Button
-            android:id="@+id/calcular"
+            android:id="@+id/primerPlano"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Primer Plano" />
+            android:text="Calcular primos PrimerPlano" />
 
         <Button
-            android:id="@+id/calcular2"
+            android:id="@+id/segundoPlano"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Segundo Plano" />
+            android:text="Calcular primos SegundoPlano" />
 
         <Button
-            android:id="@+id/intentServicioBoton"
+            android:id="@+id/intentService"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Intent Servicio" />
+            android:text="Calcular primos IntentService" />
 
         <Button
-            android:id="@+id/abrirVincular"
+            android:id="@+id/workManager"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Vincular" />
+            android:text="Calcular primos WorkManager" />
 
         <Button
-            android:id="@+id/workManagerBoton"
+            android:id="@+id/cambiarColor"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="WorkManager" />
-
-        <Button
-            android:id="@+id/color"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Color" />
-
-        <TextView
-            android:id="@+id/texto"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:text="Cambiar color" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
