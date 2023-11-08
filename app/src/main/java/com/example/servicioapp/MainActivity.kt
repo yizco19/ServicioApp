@@ -88,6 +88,12 @@ class MainActivity : AppCompatActivity() {
             workerManager.enqueue(petition)
         }
 
+        // Boton para abrir Broadcast Receiver
+        findViewById<Button>(R.id.broadcast).setOnClickListener {
+            val intent = Intent(this, BroadCastActivity::class.java)
+            startActivity(intent)
+        }
+
         // Botón para cambiar el color del botón
         findViewById<Button>(R.id.cambiarColor).setOnClickListener {
             val rnd = Random()
