@@ -17,7 +17,6 @@ class MainActivity : AppCompatActivity() {
     private var enabledSegundoPlano = false
     private var enabledIntentService = false
     private val primo=Integer.MAX_VALUE/40000
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)

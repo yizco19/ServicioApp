@@ -17,7 +17,7 @@
         tools:targetApi="34">
         <activity
             android:name=".BroadCastActivity"
-            android:exported="false" />
+            android:exported="true" />
 
         <service
             android:name=".PrimosIntentService"
@@ -40,7 +40,7 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
+                <category android:name="android.intent.category.UM_LAUNCHER" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -50,9 +50,7 @@
             android:enabled="true"
             android:exported="true">
             <intent-filter>
-                <action android:name="android.intent.action.AIRPLANE_MODE"/>
                 <action android:name="android.intent.action.BATTERY_LOW"/>
-                <action android:name="android.intent.action.BATTERY_CHANGED"/>
             </intent-filter>
         </receiver>
     </application>
