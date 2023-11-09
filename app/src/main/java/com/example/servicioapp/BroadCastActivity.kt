@@ -26,7 +26,7 @@ class BroadCastActivity : AppCompatActivity() {
         //se registra a nivel de aplicación
         applicationContext.registerReceiver(receiver,filter)*/
 
-
+        // crear BroadcastReceiver de nivel de aplicación
         receiver=object :BroadcastReceiver(){
                 override fun onReceive(context: android.content.Context?, intent: android.content.Intent?) {
                 StringBuffer().apply {
@@ -39,16 +39,14 @@ class BroadCastActivity : AppCompatActivity() {
                         if(intent?.action.equals(Intent.ACTION_BATTERY_LOW)){
                             texto.text="Bateria baja"
                         }
-                        if(intent?.action.equals(Intent.ACTION_AIRPLANE_MODE_CHANGED) && Settings.Global.getInt(context!!.getContentResolver(), Settings.Global.AIRPLANE_MODE_ON, 0) != 0){
-                            texto.text=texto.text.toString()+"\nModo aereo activado"
-                        }else{
-                            texto.text=texto.text.toString()+"\nModo aereo desactivado"
+                        if(intent?.action.equals(Intent.ACTION_AIRPLANE_MODE_CHANGED) && intent!!.getBooleanExtra("state",true)){
+                            texto.text=texto.text.toString()+"Entra en modo aéreo"
                         }
-
                     }
                 }
             }
         }
+        // IntentFilter para registrar Broadcast de nivel de bateria y modo aéreo
         val filter = IntentFilter()
         filter.addAction(Intent.ACTION_BATTERY_LOW)
         filter.addAction(Intent.ACTION_AIRPLANE_MODE_CHANGED)
