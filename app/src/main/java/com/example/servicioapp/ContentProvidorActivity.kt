@@ -12,6 +12,8 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import java.text.SimpleDateFormat
+import java.util.Date
 
 class ContentProvidorActivity : AppCompatActivity() {
     private val READ_CALL_LOG_CODE: Int = 1
@@ -71,10 +73,14 @@ class ContentProvidorActivity : AppCompatActivity() {
             c.moveToFirst()
                 val number = c.getString(c.getColumnIndex(CallLog.Calls.NUMBER))
                 val name = c.getString(c.getColumnIndex(CallLog.Calls.CACHED_NAME))
-                val date = c.getString(c.getColumnIndex(CallLog.Calls.DATE)).toString()
+                val date = c.getString(c.getColumnIndex(CallLog.Calls.DATE))
+                //convertir la fecha
+                val sdf = SimpleDateFormat("dd/MM/yyyy HH:mm:ss")
+                val fechaFormateada = sdf.format(Date(date.toLong()))
+
                 val duration = c.getString(c.getColumnIndex(CallLog.Calls.DURATION))
                 val textView = findViewById<TextView>(R.id.textView)
-                textView.text = "Numero : $number \n Nombre :$name  \n Fecha :$date \n Duración :$duration segundos"
+                textView.text = "Numero : $number \n Nombre :$name  \n Fecha :$fechaFormateada \n Duración :$duration segundos"
 
             c.close()
         }
