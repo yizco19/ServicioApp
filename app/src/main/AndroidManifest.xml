@@ -4,7 +4,7 @@
 
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
-
+    <uses-permission-sdk-23 android:name="android.permission.READ_CALL_LOG"/>
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -15,6 +15,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ServicioApp"
         tools:targetApi="34">
+        <activity
+            android:name=".ContentProvidorActivity"
+            android:exported="false" />
         <activity
             android:name=".BroadCastActivity"
             android:exported="true" />
@@ -40,6 +43,7 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.UM_LAUNCHER" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
@@ -50,7 +54,7 @@
             android:enabled="true"
             android:exported="true">
             <intent-filter>
-                <action android:name="android.intent.action.BATTERY_LOW"/>
+                <action android:name="android.intent.action.BATTERY_LOW" />
             </intent-filter>
         </receiver>
     </application>

@@ -44,6 +44,12 @@
             android:text="BroadcastReceiver" />
 
         <Button
+            android:id="@+id/contentProvidor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ContentProvidor" />
+
+        <Button
             android:id="@+id/cambiarColor"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

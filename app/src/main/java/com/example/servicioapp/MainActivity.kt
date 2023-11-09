@@ -93,6 +93,11 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        // Botón para abrir ContentProvidor
+        findViewById<Button>(R.id.contentProvidor).setOnClickListener {
+            val intent = Intent(this, ContentProvidorActivity::class.java)
+            startActivity(intent)
+        }
         // Botón para cambiar el color del botón
         findViewById<Button>(R.id.cambiarColor).setOnClickListener {
             val rnd = Random()

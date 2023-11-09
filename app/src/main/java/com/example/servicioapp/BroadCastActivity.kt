@@ -5,12 +5,8 @@ import android.content.Intent
 import android.content.IntentFilter
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.Settings
-import android.util.Log
 import android.widget.Button
 import android.widget.TextView
-import android.widget.Toast
-import androidx.localbroadcastmanager.content.LocalBroadcastManager
 
 class BroadCastActivity : AppCompatActivity() {
     lateinit var receiver: BroadcastReceiver
@@ -26,7 +22,7 @@ class BroadCastActivity : AppCompatActivity() {
         //se registra a nivel de aplicación
         applicationContext.registerReceiver(receiver,filter)*/
 
-        // crear BroadcastReceiver de nivel de aplicación
+       // crear BroadcastReceiver de nivel de aplicación
         receiver=object :BroadcastReceiver(){
                 override fun onReceive(context: android.content.Context?, intent: android.content.Intent?) {
                 StringBuffer().apply {
@@ -54,7 +50,7 @@ class BroadCastActivity : AppCompatActivity() {
 
 
         //Botón para salir la aplicación
-        findViewById<Button>(R.id.salir).setOnClickListener {
+        findViewById<Button>(R.id.salirProvidor).setOnClickListener {
             //desregistrar Broadcast
             applicationContext.unregisterReceiver(receiver)
             finish()
