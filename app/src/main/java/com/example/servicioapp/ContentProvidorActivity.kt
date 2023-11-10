@@ -25,12 +25,11 @@ class ContentProvidorActivity : AppCompatActivity() {
         // Botón para compruba si tiene permisos y se muestra la ultima llamada
         findViewById<Button>(R.id.b_proviver).setOnClickListener {
             // Verificar si tiene permisos
-
             if (ContextCompat.checkSelfPermission(
                     this,
                     android.Manifest.permission.READ_CALL_LOG
                 ) == PackageManager.PERMISSION_GRANTED
-            ) {
+            ) {// si tiene permisos muestra la ultima llamada
                 muestraUltimaLlamada()
             } else {
                 // Solicitar permisos
@@ -64,13 +63,15 @@ class ContentProvidorActivity : AppCompatActivity() {
         }
     }
 
-    @SuppressLint("Range")
+
+    @SuppressLint("Range") //SuppressLint para el manejo de excepciones de llamadas sin datos
     private fun muestraUltimaLlamada() {
         val cr = applicationContext.contentResolver
-        // se muestra la ultima llamada
+        // obtener la llamada mas reciente
         val c = cr.query(CallLog.Calls.CONTENT_URI, null, null, null, null)
         if (c != null) {
-            c.moveToFirst()
+
+            c.moveToLast()
                 val number = c.getString(c.getColumnIndex(CallLog.Calls.NUMBER))
                 val name = c.getString(c.getColumnIndex(CallLog.Calls.CACHED_NAME))
                 val date = c.getString(c.getColumnIndex(CallLog.Calls.DATE))
@@ -80,10 +81,9 @@ class ContentProvidorActivity : AppCompatActivity() {
 
                 val duration = c.getString(c.getColumnIndex(CallLog.Calls.DURATION))
                 val textView = findViewById<TextView>(R.id.textView)
-                textView.text = "Numero : $number \n Nombre :$name  \n Fecha :$fechaFormateada \n Duración :$duration segundos"
+                textView.text = " Numero : $number \n Nombre :$name  \n Fecha :$fechaFormateada \n Duración :$duration segundos"
 
             c.close()
         }
-
     }
 }
