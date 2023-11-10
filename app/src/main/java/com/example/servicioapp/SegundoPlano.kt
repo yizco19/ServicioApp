@@ -21,6 +21,7 @@ class SegundoPlano : Service() {
         Thread {
             val primos = calcularPrimos(numero)
             while (enable) {
+                // Mostrar los resultados en el log
                 Log.i("SegundoPlano ","Calculando primos...")
                 Log.i("SegundoPlano ",primos.toString())
                 try {
