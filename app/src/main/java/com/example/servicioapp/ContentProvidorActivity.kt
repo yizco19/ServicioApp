@@ -70,8 +70,13 @@ class ContentProvidorActivity : AppCompatActivity() {
         // obtener la llamada mas reciente
         val c = cr.query(CallLog.Calls.CONTENT_URI, null, null, null, null)
         if (c != null) {
+            val textView = findViewById<TextView>(R.id.textView)
+            // si no tiene ninguna llamada
+            if (c.count == 0) {
+                textView.text = "No hay llamadas"
+            }else{
 
-            c.moveToLast()
+                c.moveToLast()
                 val number = c.getString(c.getColumnIndex(CallLog.Calls.NUMBER))
                 val name = c.getString(c.getColumnIndex(CallLog.Calls.CACHED_NAME))
                 val date = c.getString(c.getColumnIndex(CallLog.Calls.DATE))
@@ -80,8 +85,10 @@ class ContentProvidorActivity : AppCompatActivity() {
                 val fechaFormateada = sdf.format(Date(date.toLong()))
 
                 val duration = c.getString(c.getColumnIndex(CallLog.Calls.DURATION))
-                val textView = findViewById<TextView>(R.id.textView)
+
                 textView.text = " Numero : $number \n Nombre :$name  \n Fecha :$fechaFormateada \n Duración :$duration segundos"
+            }
+
 
             c.close()
         }
